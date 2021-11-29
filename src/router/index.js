@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import About from '../views/About.vue'
+import NotFound from '../views/NotFound.vue'
+import Projects from '../views/Projects.vue'
+import ProjectDetails from '../components/ProjectDetails.vue'
 
 const routes = [
   {
@@ -10,11 +14,28 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    component: About
+  },
+  {
+    path: '/projects',
+    name: 'Projects',
+    component: Projects
+  },
+  {
+    path: '/projects/:slug',
+    name: 'ProjectDetails',
+    component: ProjectDetails,
+    props: true
+  },
+  /*
+    For our 404 page we need to 'catch all' routes that 
+    don't match any of our routes
+  */
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
+    component: NotFound
+  },
 ]
 
 const router = createRouter({
